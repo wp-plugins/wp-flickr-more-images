@@ -1,0 +1,5 @@
+.flickrwg li{
+	display: inline-block;
+	margin: 2px;
+}
+.flickrwg a{display: block;}
