@@ -31,7 +31,6 @@ data-lazy-type=`image`
 
 = Live demos: =
 
-https://s.w.org/plugins/wp-flickr-more-images/flickr1.jpg
 
 more will added soon
 
@@ -64,17 +63,18 @@ Great, any idea appreciated
 
 == Screenshots ==
 will update soon
+https://s.w.org/plugins/wp-flickr-more-images/flickr1.jpg
 
 == Changelog ==
 
 = 1.0 =
 * Official plugin release.
 
+= 1.1 =
+line-height ploblem fix
+custom template
+
 == Upgrade Notice ==
 
 = 1.0 =
 fresh plugin upload
-
-= 1.1 =
-line-height ploblem fix
-custom template
