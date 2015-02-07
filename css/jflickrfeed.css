@@ -1,3 +1,6 @@
+.flickrwg{
+	line-height: 0;
+}
 .flickrwg li{
 	display: inline-block;
 	margin: 2px;

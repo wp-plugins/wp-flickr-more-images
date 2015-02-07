@@ -5,7 +5,7 @@ Description: Get more image from Flickr
 Plugin URI: http://wpbootstrap.net
 Author: WPBootstrap
 Author URI: http://wpbootstrap.com
-Version: 1.0
+Version: 1.1
 License: GPL2
 Text Domain: wpboot
 */
@@ -55,6 +55,7 @@ class Wpboot_MoreFlickr extends WP_Widget {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$flickrid = (!empty($instance['flickrid']))?($instance['flickrid']):'101898334@N02';
+		$flickrtemplate = (!empty($instance['flickrtemplate']))?($instance['flickrtemplate']):'<li><a href="{{image_b}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>';
 		$flickrnumber = (!empty($instance['flickrnumber']))?($instance['flickrnumber']):'9';
 
 		echo $before_widget;
@@ -62,6 +63,7 @@ class Wpboot_MoreFlickr extends WP_Widget {
 			echo $before_title . $title . $after_title;
 		?>
 			<ul class="flickrwg" data-id="<?php echo $flickrid;?>" data-num="<?php echo $flickrnumber;?>"></ul>
+			<textarea style="display:none;" class="flickrtemplate"><?php echo $flickrtemplate; ?></textarea>
 
 
 		<?php
@@ -81,6 +83,8 @@ class Wpboot_MoreFlickr extends WP_Widget {
 		$instance = array();
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['flickrid'] = strip_tags($new_instance['flickrid']);
+		//$instance['flickrtemplate'] = strip_tags($new_instance['flickrtemplate']);
+		$instance['flickrtemplate'] = (!empty($new_instance[ 'flickrtemplate' ])) ? ($new_instance[ 'flickrtemplate' ]) :'<li><a href="{{image_b}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>';
 		$instance['flickrnumber'] = strip_tags($new_instance['flickrnumber']);
 		return $instance;
 	}
@@ -92,15 +96,10 @@ class Wpboot_MoreFlickr extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		/*
-		if ( isset( $instance[ 'title' ] ) ) {
-			$title = $instance[ 'title' ];
-		}
-		else {
-			$title = __( 'New title', 'wpboot' );
-		} */
-		$title = ( isset( $instance[ 'title' ] ) ) ? ($instance[ 'title' ]) : ( __( 'New title', 'wpboot' ));
+
+		$title = ( isset( $instance[ 'title' ] ) ) ? ($instance[ 'title' ]) : ( __( 'Flickr', 'wpboot' ));
 		$flickrid = (isset($instance[ 'flickrid' ])) ? (strip_tags($instance[ 'flickrid' ])) :'101898334@N02';
+		$flickrtemplate = (isset($instance[ 'flickrtemplate' ])) ? (($instance[ 'flickrtemplate' ])) :'<li><a href="{{image_b}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>';
 		$flickrnumber = (isset($instance[ 'flickrnumber' ])) ? (int)(strip_tags($instance[ 'flickrnumber' ])) :'9';
 		?>
 		<p>
@@ -116,6 +115,10 @@ class Wpboot_MoreFlickr extends WP_Widget {
 		<?php _e('Flickr number:', 'wpboot'); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('flickrnumber'); ?>" name="<?php echo $this->get_field_name('flickrnumber'); ?>" type="text" value="<?php echo
 			esc_attr($flickrnumber); ?>" /></p>
+		<p><label for="<?php echo $this->get_field_id('flickrtemplate'); ?>">
+		<?php _e('Flickr template:', 'wpboot'); ?></label>
+		<textarea class="widefat" id="<?php echo $this->get_field_id('flickrtemplate'); ?>" name="<?php echo $this->get_field_name('flickrtemplate'); ?>" type="text"><?php echo esc_attr($flickrtemplate); ?></textarea>
+
 		<?php
 	}
 } // class Wpboot_MoreFlickr
@@ -149,17 +152,17 @@ function Wpboot_MoreFlickrInline() {
 	(function($){
 		//want to load it after all page have been load, use it
 		//$(window).on('load',function(){
+
 		$(document).ready(function(){
 			//just use it if you want make sure this plugin is working
 			//alert('its working');
-
 			$('.flickrwg').each(function(){
 				$(this).jflickrfeed({
 					limit:$(this).data('num'),
 					qstrings:{
 						id: $(this).data('id')
 					},
-					itemTemplate:'<li><a href="{{image_b}}"><img src="{{image_s}}" alt="{{title}}" /></a></li>'
+					itemTemplate:$(this).next().text()
 				});
 			});
 		});

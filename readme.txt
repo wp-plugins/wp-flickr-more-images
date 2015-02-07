@@ -5,7 +5,7 @@ Creator's website link: http://wpbootstrap.com/
 Tags: flickr, wp flickr, flickr images, WP Flickr more images
 Requires at least: 3.0.1
 Tested up to: 4.1
-Stable tag: 4.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,9 +15,27 @@ Create Flickr Images. More than 10 images
 
 Have you already create Flickr badge? that badge limit the number of images by 10, with this plugin you can view more images from your faforite Flickr. Have fun. more feature will update soon
 
+base on jflickrfeed http://files.gethifi.com/posts/jflickrfeed/example.html
+
+= TODO =
+1. custom style
+2. support lazy load
+3. web support
+
+= support =
+now support bj lazyload
+add this class = `lazy data-lazy-ready`
+and change src to data-lazy-src
+data-lazy-type=`image`
+
 
 = Live demos: =
-will added soon
+
+https://s.w.org/plugins/wp-flickr-more-images/flickr1.jpg
+
+more will added soon
+
+
 
 == Installation ==
 
@@ -33,7 +51,15 @@ This section describes how to install the plugin and get it working.
 
 = Plugin is not working =
 
-Please disable all plugins and check if shortcode plugin is working properly. Then you can enable all plugins one by one to find out which plugin is conflicting with plugin. and make sure you have the latest wordpress installed
+Please disable all plugins and check if shortcode plugin is working properly. Then you can enable all plugins one by one to find out which plugin is conflicting with plugin. and make sure you have the latest wordpress installed and your themes support jQuery (have jQuery enabled)
+
+= i have some bug, where i can find you =
+
+for now you can post it on support link http://wordpress.org/support/plugin/wp-flickr-more-images
+
+= i have some idea for improvement =
+
+Great, any idea appreciated
 
 
 == Screenshots ==
@@ -48,3 +74,7 @@ will update soon
 
 = 1.0 =
 fresh plugin upload
+
+= 1.1 =
+line-height ploblem fix
+custom template
